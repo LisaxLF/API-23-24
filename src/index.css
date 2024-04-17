@@ -1,0 +1,77 @@
+/* load reset css */
+@import 'reset.css';
+@import 'typography.css';
+@import 'custom.css';
+
+/* @import '../components/card/card.css';
+@import "../views/detail.css"; */
+@import '../components/showcase/showcase.css';
+
+body {
+	background-color: var(--color-bg);
+	color: var(--color-primary);
+	font-family: var(--font-family);
+}
+
+header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 1rem 2rem;
+	height: 9vmin;
+
+	.logo-gamenation {
+		height: 2rem;
+	}
+
+	ul {
+		display: flex;
+		gap: 0.5rem;
+
+		li,
+		a {
+			list-style: none;
+			text-decoration: none;
+		}
+
+		a {
+			color: var(--color-primary);
+			z-index: 1;
+		}
+
+		li {
+			text-transform: uppercase;
+			padding: 0.5rem 1rem;
+		}
+
+		a:hover:not(li:last-of-type a) {
+			border-bottom: 2px solid var(--color-primary);
+			padding-bottom: 0.2rem;
+		}
+
+		li:last-of-type {
+			background: var(--stroke-cards);
+			filter: var(--boxshadow-cards);
+			border-radius: var(--border-radius);
+			position: relative;
+		}
+	}
+}
+
+.grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+	grid-gap: 1rem;
+}
+
+main {
+	padding: 0 2rem;
+
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
+	section::first-of-type {
+		height: 75vmin;
+	}
+}

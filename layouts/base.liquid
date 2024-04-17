@@ -1,0 +1,40 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% block head %}
+    <title>Game nation</title>
+  {% endblock %}
+  <link rel="icon" href="images/favicon.png" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+  {% if NODE_ENV == "development" %}
+    <script type="module" src="http://localhost:5173/@vite/client" defer></script>
+    <script type="module" src="http://localhost:5173/src/index.js" defer></script>
+  {% else %}
+    <link rel="stylesheet" href="/main.css">
+    <script src="/main.js" defer></script>
+  {% endif %}
+  {% block styles %}{% endblock %}
+  {% block scripts %}{% endblock %}
+</head>
+
+<body>
+    <header>
+        <a href="/"><img class="logo-gamenation" src="images/logoGameNation.svg" alt="logo"></a>
+        <nav>
+            <ul>
+                <li><a href="">News</a></li>
+                <li><a href="">Consoles</a></li>
+                <li><a href="">Genres</a></li>
+                <li><a href="">Buy</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+    {% block content %}{% endblock %}
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,17 @@
+{% comment %} Loop over de gamegegevens {% endcomment %}
+<section class="highlighted-covers">
+{% comment %} Loop over de hoog gewaardeerde spellen {% endcomment %}
+{% for game in games %}
+    <article class="game-cover-wrapper">
+        <div class="game-content-wrapper">
+            <h2>{{ game.name }}</h2>
+        </div>
+        
+        {% comment %} Loop over de cover art van elk spel {% endcomment %}
+        {% for cover in gameCover[game.id] %}
+            <img src="{{ cover.url }}" alt="{{ game.name }}" class="game-cov">
+        {% endfor %}
+    </article>
+{% endfor %}
+
+</section>
