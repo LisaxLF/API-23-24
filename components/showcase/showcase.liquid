@@ -1,17 +1,45 @@
-{% comment %} Loop over de gamegegevens {% endcomment %}
 <section class="highlighted-covers">
-{% comment %} Loop over de hoog gewaardeerde spellen {% endcomment %}
-{% for game in games %}
+  {% comment %} Loop over de hoog gewaardeerde spellen {% endcomment %}
+  <div class="game-cover-spotlight"></div>
+  <div class="game-cover-spotlight"></div>
+  <div class="game-cover-spotlight"></div>
+  {% for game in games %}
     <article class="game-cover-wrapper">
-        <div class="game-content-wrapper">
-            <h2>{{ game.name }}</h2>
-        </div>
-        
-        {% comment %} Loop over de cover art van elk spel {% endcomment %}
-        {% for cover in gameCover[game.id] %}
-            <img src="{{ cover.url }}" alt="{{ game.name }}" class="game-cov">
+      {% comment %} Zoek de bijpassende cover voor het huidige spel {% endcomment %}
+      {% for coverGroup in covers %}
+        {% for cover in coverGroup %}
+          {% if cover.id == game.cover %}
+            <img
+              id="imagecolor"
+              src="{{ cover.url }}"
+              alt="{{ game.name }}">
+          {% endif %}
         {% endfor %}
+      {% endfor %}
+      <div class="game-content-wrapper">
+        <div class="game-content-overlay"></div>
+        <div class="text-wrapper">
+          <h2>{{ game.name }}</h2>
+          <p>{{ game.involved_companies[0] }}</p>
+        </div>
+        <div class="platform-wrapper">
+          <p>Avaliable on:</p>
+          <div class="platforms">
+          {% comment %} FROM DIFFERENT DATA {% endcomment %}
+          {% comment %} {% for platform in game.platforms %}
+                       <img src="./images/{{ platform }}.svg" alt="{{ platform }}">
+                    {% endfor %} {% endcomment %}
+          </div>
+        </div>
+        <div class="button-wrapper">
+          <a href="/game/{{ game.id }}" class="button button-detail">View game</a>
+          <a href="/game/{{ game.id }}/buy" class="button button-buy">Buy</a>
+        </div>
+      </div>
     </article>
-{% endfor %}
-
+  {% endfor %}
+  <img
+    src="./images/mouse.svg"
+    alt="Scroll down"
+    class="scroll-down">
 </section>

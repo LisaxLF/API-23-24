@@ -1,0 +1,50 @@
+.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.4em 1em;    
+    border-radius: var(--border-radius);
+    filter: var(--boxshadow-cards);
+    line-height: 15px;
+    gap: 0.3em;
+}
+
+.button.button-detail {
+	background-color: var(--color-bg);
+    color: var(--color-primary);
+    border: var(--button-border);
+}
+
+.button.button-buy {
+	background-color: var(--color-primary);
+    color: var(--color-bg);
+}
+
+a.button.button-buy {
+	background-color: var(--color-primary);
+    color: var(--color-bg);
+}
+
+li.button.button-buy::after {
+    content: url(images/buy-black.svg);
+}
+
+li.button.button-buy:hover,
+.button.button-buy:hover {
+    background-color: var(--color-bg);
+}
+
+li.button.button-buy:hover a,
+a.button.button-buy:hover {
+    color: var(--color-primary);
+}
+
+
+li.button.button-buy:hover::after,
+.button.button-buy:hover::after {
+    content: url(images/buy-white.svg);
+}
+
+.button.button-buy::after {
+    content: url(images/buy-black.svg);
+}

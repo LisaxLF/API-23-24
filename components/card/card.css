@@ -1,0 +1,80 @@
+.gameCard {
+    background-color: var(--color-bg);
+    height: 300px;
+    width: 100%;
+    display: grid;
+    grid-template-rows: 1fr 1fr 120px;
+    border-radius: var(--border-radius);
+    transition: all 0.3s ease-in-out;
+
+    .gameCard-image-container {
+        grid-row: 1 / 3;
+        background-color: dimgray;
+        position: relative;
+
+        > img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    .gameCard-content-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        .gameCard-text-wrapper {
+            display: flex;
+            align-items: center;
+            flex-direction: row;
+            justify-content: space-between;
+            padding: 1rem 0;
+
+            .gamecard-text-gameInfo {
+                display: flex;
+                flex-direction: column;
+                width: 70%;
+                gap: .5rem;
+
+                > p {
+                    font-size: 1.2rem;
+                    font-weight: 100;
+                    color: rgb(152, 152, 152);
+                }
+            }
+
+            span {
+                font-size: 1.2rem;
+                background-color: dimgray;
+                filter: inset 0 0 0 1px var(--color-border);
+                color: var(--color-primary);
+                padding: .5rem;
+            }
+        }
+
+        .button-wrapper {
+            justify-content: space-between;
+            width: 100%;
+
+            a {
+                font-size: 1.1rem;
+            }
+
+            .button.button-detail {
+                width: 100%;
+            }
+        }
+    }
+}
+
+.gameCard:hover {
+    filter: drop-shadow(0px 0px 6px rgba(0, 0, 0, 0.5));
+    filter: drop-shadow(0px 0px 6px rgba(0, 0, 0, 0.5));
+    transform: scale(1.05);
+
+    .gameCard-content-container {
+        padding: .5rem;
+        transition: all 0.3s ease-in-out;
+    }
+}

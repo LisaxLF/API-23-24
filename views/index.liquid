@@ -1,13 +1,55 @@
-{% layout "layouts/base.liquid" %} 
+{% layout "layouts/base.liquid" %}
 
 {% block content %}
- <section>
-  {% comment %} render the showcase.liquid {% endcomment %}
-  {% include "components/showcase/showcase.liquid" %}
- </section>
- <section>
-
- </section>
-  <section>
-  </section>
+  <div class="home-container">
+    {% comment %} render the showcase.liquid with the data {% endcomment %}
+    {% include "components/showcase/showcase.liquid" %}
+    <section class="section-platforms">
+      <article class="introduction-platforms">
+        <h2>Travel, explore and development your game skills
+        </h2>
+        <p>Lorem ipsum dolor sit amet consectetur. Cras et dui odio nisl enim ac mauris facilisi tellus. Tincidunt risus vulputate posuere convallis vitae risus natoque pulvinar.</p>
+      </article>
+      <div class="container-platform-icons">
+        <a href="/games/platform{{ game.platform }}" class="platform-icon">
+          <img
+            class="icon-img"
+            src="{{ 'images/platforms/pc.png' | asset_url }}"
+            alt="PC">
+          <p class="platform-icon-name">PC</p>
+        </a>
+        <a href="/games/platform{{ game.platform }}" class="platform-icon">
+          <img
+            class="icon-img"
+            src="{{ 'images/platforms/ps4.png' | asset_url }}"
+            alt="PS4">
+          <p class="platform-icon-name">PS4</p>
+        </a>
+        <a href="/games/platform{{ game.platform }}" class="platform-icon">
+          <img
+            class="icon-img"
+            src="{{ 'images/platforms/xbox.png' | asset_url }}"
+            alt="Xbox">
+          <p class="platform-icon-name">Xbox</p>
+        </a>
+        <a href="/games/platform{{ game.platform }}" class="platform-icon">
+          <img
+            class="icon-img"
+            src="{{ 'images/platforms/switch.png' | asset_url }}"
+            alt="Switch">
+          <p class="platform-icon-name">Switch</p>
+        </a>
+      </div>
+    </section>
+    <section>
+      <h2>popular games</h2>
+      <div class="popular-games-container">
+        {% comment %} For each game render the card {% endcomment %}
+        {% for popularGame in popularGames %}
+          {% include "components/card/card.liquid" %}
+        {% endfor %}
+        {% include "components/card/card.liquid" %}
+      </div>
+    </section>
+  </div>
 {% endblock %}

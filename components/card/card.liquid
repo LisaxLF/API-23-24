@@ -1,17 +1,50 @@
-<div class="gameCard">
-    <div class="gameCard-cover-wrapper">
-        <img class="gameCard-cover" src="" alt="game cover">
-    </div>
-    <article class="gameCard_info">
-        <div>
-            <h3 class="gameCard-title"></h3>
-            <p class="gameCard-description"></p>
+{% comment %} Loop over de games en toon de gegevens {% endcomment %}
+{% if gamesHighestRated %}
+  {% for gameHighestRated in gamesHighestRated %}
+    {% if gameHighestRated.name %}
+      <article class="gameCard">
+        <div class="gameCard-image-container">
+          {% for coverGroup in coversHighestRated %}
+            {% for cover in coverGroup %}
+              {% if cover.id == gameHighestRated.cover %}
+                <img src="{{ cover.url }}" alt="{{ gameHighestRated.name }}">
+              {% endif %}
+            {% endfor %}
+          {% endfor %}
+          <div class="gameCard-platform-icons"></div>
+          <span class="price-tag"></span>
         </div>
-        <div>
+        <div class="gameCard-content-container">
+          <div class="gameCard-text-wrapper">
+            <div class="gamecard-text-gameInfo">
+              <h3>{{ gameHighestRated.name }}</h3>
+              {% comment %} For each  {% endcomment %}
+              {% if companiesHighestRated %}
+                {% for company in companiesHighestRated %}
+                  {% if gameHighestRated.involved_companies == company.id %}
+                    <p>{{ company.name }}</p>
+                  {% endif %}
+                {% endfor %}
+              {% endif %}
+            </div>
+            <span class="gamecard-game-rating">{{ gameHighestRated.rating }}%</span>
+          </div>
+          <div class="button-wrapper">
+            <a href="/game/{{ gameHighestRated.id }}" class="button button-detail">View game</a>
+            <a href="/game/{{ gameHighestRated.id }}/buy" class="button button-buy">Buy</a>
+          </div>
         </div>
-    </article>
-    <div>
-        <p class="gameCard-price"></p>
-        <button class="gameCard_button">Add to cart</button>
-    </div>
-</div>
+      </article>
+    {% endif %}
+  {% endfor %}
+{% else %}
+  <p>No data available</p>
+{% endif %}
+
+{% comment %} Check for data from companiesHighestRAted {% endcomment %}
+{% comment %} Toon de JSON-gegevens als ze beschikbaar zijn {% endcomment %}
+{% if companiesHighestRated %}
+  {{ companiesHighestRated | json }}
+{% else %}
+  <p>No games data available</p>
+{% endif %}
