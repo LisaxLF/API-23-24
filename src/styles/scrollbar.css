@@ -1,0 +1,36 @@
+/* Style for the scrollbar track */
+::-webkit-scrollbar-track {
+    background-color: var(--color-bg);
+    /* inset */
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Style for the scrollbar thumb (the movable part of the scrollbar) */
+::-webkit-scrollbar-thumb {
+    background-color: rgb(214, 214, 214);
+    opacity: 0.4;
+    border-radius: 10px;
+}
+
+/* Style for the scrollbar arrows (if applicable) */
+::-webkit-scrollbar-button {
+    display: none;
+}
+
+/* Style for the scrollbar corner (if applicable) */
+::-webkit-scrollbar-corner {
+    background-color: transparent;
+}
+
+/* Additional custom styles */
+::-webkit-scrollbar {
+    width: 10px; /* Set the width of the scrollbar */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-secondary); /* Change the color on hover */
+}
+
+::-webkit-scrollbar-thumb:active {
+    background-color: var(--color-accent); /* Change the color on active */
+}

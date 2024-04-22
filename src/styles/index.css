@@ -5,9 +5,12 @@ body {
 }
 
 li,
-a {
+a,
+span {
 	list-style: none;
 	text-decoration: none;
+	font-size: 1.2rem;
+	line-height: 18px;
 }
 
 header {

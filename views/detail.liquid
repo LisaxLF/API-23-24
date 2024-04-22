@@ -1,0 +1,60 @@
+{% layout "layouts/base.liquid" %}
+
+{% block content %}
+  <section class="game-container-info">
+    <div class="game-container-grid">
+      <div class="game-content-info-wrapper">
+        <a href="/" class="button button-back">Back to homepage</a>
+        <div class="info-wrapper">
+          <h1>{{ game.name }}</h1>
+          <div class="game-content-company">
+            {% for company in game.involved_companies %}
+              <h2>{{ company }}</h2>
+            {% endfor %}
+          </div>
+          {% if game.storyline %}
+            <p>{{ game.storyline }}</p>
+          {% else %}
+            <p>{{ game.summary }}</p>
+          {% endif %}
+          <div class="button-wrapper">
+            <div class="buttons">
+              <a href="/game/{{ game.id }}/buy" class="button button-buy">Buy game</a>
+              <span class="price-rating">nu: ${{ price }}</span>
+            </div>
+            <div class="platforms">
+                {% for platform in game.platforms %}
+                  <li>{{ platform }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="game-content-image-wrapper">
+        <img src="{{ cover.url }}" alt="cover {{ game.name }}">
+      </div>
+    </div>
+  </section>
+  <section class="game-container-rating">
+    <div class="ratings-wrapper">
+      <div class="rating-container">
+        <div class="circles-wrapper">
+          <div class="circle">
+            <span class="rating-percentage">50%</span>
+          </div>
+        </div>
+        <p class="rating-text"></p>
+      </div>
+      <div class="rating-container">
+        <div class="circles-wrapper">
+          <div class="circle">
+            <span class="rating-percentage">50%</span>
+          </div>
+        </div>
+        <p class="rating-text"></p>
+      </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

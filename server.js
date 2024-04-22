@@ -81,7 +81,74 @@ app.get('/', async (req, res) => {
 	}
 });
 
-app.get('/game/:id/', async () => {});
+app.get('/game/:id/', async (req, res) => {
+	try {
+		// Haal het spel-ID op uit de URL
+		const gameId = req.params.id;
+		console.log('Game ID:', gameId);
+
+		// Haal de toegangstoken op van de Twitch API
+		const accessToken = await getTwitchAccessToken();
+		console.log('Access token:', accessToken);
+
+		// Haal de spelgegevens op van de IGDB API
+		const gameResponse = await fetch(`https://api.igdb.com/v4/games`, {
+			method: 'POST',
+			headers: {
+				'Client-ID': process.env.TWITCH_CLIENT_ID,
+				Authorization: `Bearer ${accessToken}`,
+			},
+			body: `fields *; where id = ${gameId};`,
+		});
+
+		// Controleer of het antwoord van de API succesvol is
+		if (!gameResponse.ok) {
+			throw new Error('Game not found');
+		}
+
+		// Haal de spelgegevens op uit het JSON-antwoord
+		const gameIdData = await gameResponse.json();
+		console.log('Game data:', gameIdData);
+
+		// Haal de gegevens van het eerste spel op uit de JSON-array
+		const gameData = gameIdData[0];
+
+		// Controleer of er spelgegevens zijn gevonden
+		if (!gameData) {
+			throw new Error('Game not found');
+		}
+
+		// Haal het ID van de cover op uit de spelgegevens
+		const gameCoverId = gameData.cover;
+		console.log('Cover ID:', gameCoverId);
+
+		// Haal de covergegevens op van de IGDB API
+		let gameCoverData = await getCoverGame(gameCoverId, accessToken);
+		console.log('Cover data:', gameCoverData);
+		gameCoverData = gameCoverData[0];
+
+		// Haal de release date op van het spel
+		const gameReleaseDate = gameData.first_release_date;
+		console.log('Release date:', gameReleaseDate);
+
+		// Bepaal de prijs van het spel
+		const gamePrice = determinePrice(gameReleaseDate);
+		console.log('Price:', gamePrice);
+
+		// Render de template met de spelgegevens
+		const renderedTemplate = renderTemplate('views/detail.liquid', {
+			game: gameData,
+			cover: gameCoverData,
+			price: gamePrice,
+		});
+
+		// Stuur de gerenderde template als reactie
+		res.send(renderedTemplate);
+	} catch (error) {
+		// Stuur een foutmelding als er een probleem is opgetreden
+		res.status(404).send(error.message);
+	}
+});
 
 const renderTemplate = (template, data) => {
 	const templateData = {
@@ -191,22 +258,13 @@ async function getCompanyName(gameCompanyId, accessToken) {
 	});
 
 	if (!response.ok) {
-		throw new Error(`Unable to fetch detailed company data for game with ID ${gameCompanyId}`);
+		throw new Error(
+			`Unable to fetch detailed company data for game with ID ${gameCompanyId}`,
+		);
 	}
 
 	const data = await response.json();
 	return data;
-}
-
-async function getReleaseDate(gameReleaseDate, accessToken) {
-	const response = await fetch(`https://api.igdb.com/v4/release_dates`, {
-		method: 'POST',
-		headers: {
-			'Client-ID': process.env.TWITCH_CLIENT_ID,
-			Authorization: `Bearer ${accessToken}`,
-		},
-		body: 'fields *; where id =' + gameReleaseDate + ';',
-	});
 }
 
 // Extra functie om een prijs te bepalen

@@ -5,8 +5,25 @@
     padding: 0.4em 1em;    
     border-radius: var(--border-radius);
     filter: var(--boxshadow-cards);
-    line-height: 15px;
     gap: 0.3em;
+    transition: all 0.2s ease-in-out;
+}
+
+.button.button-back {
+    border-bottom: 2px solid var(--color-primary);
+    color: var(--color-primary);
+    display: inline-flex;
+    padding: .5rem 0.2rem;
+    width: fit-content;
+}
+
+.button.button-back::before {
+    content: '←';
+
+}
+
+.button.button-back:hover {
+    padding-bottom: .2rem;  
 }
 
 .button.button-detail {
@@ -26,12 +43,13 @@ a.button.button-buy {
 }
 
 li.button.button-buy::after {
-    content: url(images/buy-black.svg);
+    content: url(/images/buy-black.svg);
 }
 
 li.button.button-buy:hover,
 .button.button-buy:hover {
     background-color: var(--color-bg);
+    border: var(--button-border);
 }
 
 li.button.button-buy:hover a,
@@ -42,9 +60,9 @@ a.button.button-buy:hover {
 
 li.button.button-buy:hover::after,
 .button.button-buy:hover::after {
-    content: url(images/buy-white.svg);
+    content: url(/images/buy-white.svg);
 }
 
 .button.button-buy::after {
-    content: url(images/buy-black.svg);
+    content: url(/images/buy-black.svg);
 }

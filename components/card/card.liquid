@@ -40,11 +40,3 @@
 {% else %}
   <p>No data available</p>
 {% endif %}
-
-{% comment %} Check for data from companiesHighestRAted {% endcomment %}
-{% comment %} Toon de JSON-gegevens als ze beschikbaar zijn {% endcomment %}
-{% if companiesHighestRated %}
-  {{ companiesHighestRated | json }}
-{% else %}
-  <p>No games data available</p>
-{% endif %}

@@ -4,7 +4,9 @@
 @import 'styles/custom.css';
 @import 'styles/index.css';
 @import 'styles/button.css';
+@import 'styles/scrollbar.css';
 
 /* Component styling */
+@import '../views/detail.css';
 @import '../components/showcase/showcase.css';
 @import '../components/card/card.css';
