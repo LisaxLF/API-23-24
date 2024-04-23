@@ -2,10 +2,6 @@ section {
     max-width: var(--section-max-width);
 } 
 
-.game-container-info {
-    padding: 0 4rem;
-}
-
 .game-container-grid {
     display: grid;
     grid-template-columns: 2fr 1fr;
@@ -99,19 +95,18 @@ section {
 .ratings-wrapper {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 4rem;
 
     .rating-container {
 
         .circles-wrapper {
-            background-color: aqua;
             display: flex;
             justify-content: center;
             align-items: center;
             filter: var(--boxshadow-cards);
             position: relative;
-            width: 14rem;
-            height: 14rem;
+            width: 10rem;
+            aspect-ratio: 1;
 
             .circle {
                 position: absolute;
@@ -123,25 +118,26 @@ section {
                 justify-content: center;
                 top: 0;
                 left: 0;
-                background: conic-gradient(
-                    var(green) 0 0%,
-                    var(white) 0 100%
-                );
+                background: white;
+                filter: var(--boxshadow-cards);
+                
+
+                .rating-percentage {
+                    font-size: 2rem;   
+                    color: var(--color-primary);     
+                    z-index: 1;        
+                }
             }
 
             .circle::after {
                 content: '';
                 background-color: var(--color-bg);
                 position: absolute;
-                width: 85%;
+                width: 80%;
                 aspect-ratio: 1;
                 border-radius: 50%;
-
-                span {
-                    font-size: 2rem;   
-                    color: var(--color-primary);     
-                    z-index: 1;        
-                }
+                box-shadow: inset 0 0 4px 5px rgb(48, 48, 48),
+                0 0 2px 2px rgb(19, 19, 19);
             }
         }
 
@@ -151,4 +147,10 @@ section {
             color: lightgray;
         }
     }
+}
+
+.game-container-rating {
+    width: 100%;
+    background-color: var(--color-bg);
+    filter: var(--boxshadow-section);
 }
