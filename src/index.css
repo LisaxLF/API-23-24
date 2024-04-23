@@ -7,6 +7,6 @@
 @import 'styles/scrollbar.css';
 
 /* Component styling */
-@import '../views/detail.css';
-@import '../components/showcase/showcase.css';
-@import '../components/card/card.css';
+@import './views/detail.css';
+@import './components/showcase/showcase.css';
+@import './components/card/card.css';
