@@ -9,7 +9,7 @@ const engine = new Liquid({
 });
 
 const app = new App();
-app.use(logger()).use('/', sirv('src')).listen(process.env.PORT);
+app.use(logger()).use('/', sirv('dist/assets')).listen(process.env.PORT);
 console.log(`Server running on port ${process.env.PORT}`);
 
 app.get('/', async (req, res) => {
@@ -24,19 +24,6 @@ app.get('/', async (req, res) => {
 		// Haal de covers van de spellen op
 		const gameCover = await Promise.all(
 			highlightedGames.map((game) => getCoverGame(game.cover, accessToken)),
-		);
-
-		// Haal de bedrijfsnaam van de spellen op
-		const involvedCompanyIds = highlightedGames
-			.flatMap((game) => game.involved_companies)
-			.flat();
-
-		const uniqueCompanyIds = [...new Set(involvedCompanyIds)];
-
-		const gameCompany = await Promise.all(
-			uniqueCompanyIds.map((companyId) =>
-				getCompanyName(companyId, accessToken),
-			),
 		);
 
 		// MEEST GEWAARDEERDE SPELLEN //
@@ -58,7 +45,6 @@ app.get('/', async (req, res) => {
 		const renderedTemplate = renderTemplate('views/index.liquid', {
 			games: highlightedGames,
 			covers: gameCover,
-			companies: gameCompany,
 			gamesHighestRated: highestRatedGames,
 			coversHighestRated: highestRatedGameCover,
 		});

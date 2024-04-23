@@ -1,9 +1,11 @@
 import { defineConfig } from 'vite';
+import eslint from 'vite-plugin-eslint';
 import path from 'node:path';
 const __dirname = import.meta.dirname;
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  plugins: [eslint({ exclude: ['**/node_modules/**', '**/dist/**', '**/*.min.*'] })],
   build: {
     minify: false,
     emptyOutDir: false,
@@ -15,6 +17,6 @@ export default defineConfig({
         chunkFileNames: 'assets/[name].js',
         assetFileNames: 'assets/[name].[ext]',
       }
-    }
+    },
   },
 });

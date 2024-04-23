@@ -1,5 +1,4 @@
 import './index.css';
-import './scripts/showcase.js';
-import './scripts/colorpicker.js';
+import 'scripts/showcase.js';
 
 console.log('Hello, world!');

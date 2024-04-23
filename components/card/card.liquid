@@ -18,14 +18,7 @@
           <div class="gameCard-text-wrapper">
             <div class="gamecard-text-gameInfo">
               <h3>{{ gameHighestRated.name }}</h3>
-              {% comment %} For each  {% endcomment %}
-              {% if companiesHighestRated %}
-                {% for company in companiesHighestRated %}
-                  {% if gameHighestRated.involved_companies == company.id %}
-                    <p>{{ company.name }}</p>
-                  {% endif %}
-                {% endfor %}
-              {% endif %}
+              <p>{{ gameHighestRated.involved_companies }}</p>
             </div>
             <span class="gamecard-game-rating">{{ gameHighestRated.rating }}%</span>
           </div>
