@@ -42,7 +42,6 @@ app.get('/', async (req, res) => {
 		// MEEST GEWAARDEERDE SPELLEN //
 		// Haal gegevens op van de meeste gewaardeerde spellen
 		const highestRatedGames = await getHighestRatedGames(accessToken);
-		console.log('The nine most highest rated games:', highestRatedGames);
 
 		// De rating van de spellen beperken tot hele getallen
 		highestRatedGames.forEach((game) => {
@@ -60,8 +59,6 @@ app.get('/', async (req, res) => {
 				getCompanyName(game.involved_companies, accessToken),
 			),
 		);
-
-		console.log('The involved companies:', involvedCompanyIdsHighestRated);
 
 		// Render de template met de gamegegevens
 		const renderedTemplate = renderTemplate('views/index.liquid', {
@@ -85,11 +82,9 @@ app.get('/game/:id/', async (req, res) => {
 	try {
 		// Haal het spel-ID op uit de URL
 		const gameId = req.params.id;
-		console.log('Game ID:', gameId);
 
 		// Haal de toegangstoken op van de Twitch API
 		const accessToken = await getTwitchAccessToken();
-		console.log('Access token:', accessToken);
 
 		// Haal de spelgegevens op van de IGDB API
 		const gameResponse = await fetch(`https://api.igdb.com/v4/games`, {
@@ -108,7 +103,6 @@ app.get('/game/:id/', async (req, res) => {
 
 		// Haal de spelgegevens op uit het JSON-antwoord
 		const gameIdData = await gameResponse.json();
-		console.log('Game data:', gameIdData);
 
 		// Haal de gegevens van het eerste spel op uit de JSON-array
 		const gameData = gameIdData[0];
@@ -120,20 +114,16 @@ app.get('/game/:id/', async (req, res) => {
 
 		// Haal het ID van de cover op uit de spelgegevens
 		const gameCoverId = gameData.cover;
-		console.log('Cover ID:', gameCoverId);
 
 		// Haal de covergegevens op van de IGDB API
 		let gameCoverData = await getCoverGame(gameCoverId, accessToken);
-		console.log('Cover data:', gameCoverData);
 		gameCoverData = gameCoverData[0];
 
 		// Haal de release date op van het spel
 		const gameReleaseDate = gameData.first_release_date;
-		console.log('Release date:', gameReleaseDate);
 
 		// Bepaal de prijs van het spel
 		const gamePrice = determinePrice(gameReleaseDate);
-		console.log('Price:', gamePrice);
 
 		// Render de template met de spelgegevens
 		const renderedTemplate = renderTemplate('views/detail.liquid', {
