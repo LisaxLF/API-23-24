@@ -5,7 +5,10 @@
     {% block head %}
       <title>Game nation</title>
     {% endblock %}
-    <link rel="icon" href="/images/favicon.png" type="image/x-icon">
+    <link
+      rel="icon"
+      href="/images/favicon.png"
+      type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link
       rel="preconnect"
@@ -28,8 +31,8 @@
         src="http://localhost:5173/src/index.js"
         defer></script>
     {% else %}
-      <link rel="stylesheet" href="/main.css">
-      <script src="/main.js" defer></script>
+      <link rel="stylesheet" href="/index.css">
+      <script src="/index.js" defer></script>
     {% endif %}
     {% block styles %}
     {% endblock %}
