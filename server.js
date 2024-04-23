@@ -53,12 +53,6 @@ app.get('/', async (req, res) => {
 			highestRatedGames.map((game) => getCoverGame(game.cover, accessToken)),
 		);
 
-		// Haal de bedrijfsnaam van de spellen op
-		const involvedCompanyIdsHighestRated = await Promise.all(
-			highestRatedGames.map((game) =>
-				getCompanyName(game.involved_companies, accessToken),
-			),
-		);
 
 		// Render de template met de gamegegevens
 		const renderedTemplate = renderTemplate('views/index.liquid', {
@@ -67,7 +61,6 @@ app.get('/', async (req, res) => {
 			companies: gameCompany,
 			gamesHighestRated: highestRatedGames,
 			coversHighestRated: highestRatedGameCover,
-			companiesHighestRated: involvedCompanyIdsHighestRated,
 		});
 
 		// Stuur de gerenderde template als reactie
@@ -229,27 +222,6 @@ async function getCoverGame(coverId, accessToken) {
 	if (!response.ok) {
 		throw new Error(
 			`Unable to fetch detailed game cover for game with ID ${coverId}`,
-		);
-	}
-
-	const data = await response.json();
-	return data;
-}
-
-async function getCompanyName(gameCompanyId, accessToken) {
-	// Gebruik de companyIdList om gegevens op te halen van je endpoint
-	const response = await fetch(`https://api.igdb.com/v4/companies`, {
-		method: 'POST',
-		headers: {
-			'Client-ID': process.env.TWITCH_CLIENT_ID,
-			Authorization: `Bearer ${accessToken}`,
-		},
-		body: 'fields *; where id =' + gameCompanyId + ';', // Verbind de bedrijfs-ID's met komma's
-	});
-
-	if (!response.ok) {
-		throw new Error(
-			`Unable to fetch detailed company data for game with ID ${gameCompanyId}`,
 		);
 	}
 
